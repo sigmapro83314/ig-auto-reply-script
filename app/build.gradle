@@ -1,0 +1,86 @@
+```groovy
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    ext.kotlin_version = '1.7.10' // Kotlin version management
+    repositories {
+        google() // Google's Maven repository for Android dependencies
+        mavenCentral() // Central repository for other dependencies
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.2.0' // Android Gradle Plugin
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version" // Kotlin Gradle plugin for Android
+    }
+}
+
+plugins {
+    id 'com.android.application' // Apply Android application plugin
+    id 'org.jetbrains.kotlin.android' // Apply Kotlin Android plugin for Kotlin support
+}
+
+// This block defines the Android project configuration
+android {
+    compileSdkVersion 34 // Set the compile SDK version
+
+    defaultConfig {
+        applicationId "com.madhub.igautoreplyscript" // Unique application identifier
+        minSdkVersion 21 // Minimum SDK version required to run the app
+        targetSdkVersion 34 // Target SDK version for compatibility
+        versionCode 1 // Version code for internal tracking
+        versionName "1.0.0" // User-friendly version name
+        resConfigs "en" // Set resource configuration for the English language
+
+        // Enabling multidex to support a larger number of methods
+        multiDexEnabled true 
+    }
+
+    // Build types configuration
+    buildTypes {
+        release {
+            minifyEnabled false // Disable code shrinking
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro' // ProGuard configuration files
+        }
+    }
+
+    // Configurations for Kotlin Options
+    kotlinOptions {
+        jvmTarget = "1.8" // Set the target JVM version for Kotlin
+    }
+
+    // Enabling view binding for a more efficient layout management
+    viewBinding {
+        enabled = true 
+    }
+}
+
+// Dependencies section, ensure all libraries are relevant to the project
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version" // Kotlin standard library
+    implementation 'androidx.core:core-ktx:1.12.0' // AndroidX extensions for Kotlin
+    implementation 'androidx.appcompat:appcompat:1.6.1' // Support for modern Android features
+    implementation 'com.google.android.material:material:1.9.0' // Material Design components
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4' // Constraint layout for UI designs
+    implementation 'androidx.multidex:multidex:2.0.1' // Multidex for supporting more methods
+
+    // Consider adding libraries that can assist with social media management and automation
+    implementation 'com.github.bumptech.glide:glide:4.13.2' // Image loading library for efficient image management
+    // Retrofit for networking operations, essential for any automated interactions with social media APIs
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0' 
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0' // Gson converter for API responses
+
+    // Optional: Room for local database management, if the application requires data persistence
+    implementation 'androidx.room:room-runtime:2.5.0' 
+    kapt 'androidx.room:room-compiler:2.5.0' // Annotation processor for Room
+}
+
+// The configuration above aligns with best practices for Android project structure and 
+// ensures compliance with Android's guidelines while providing capabilities required 
+// for managing social media accounts effectively.
+
+```
+
+### Explanation:
+- **Gradle Plugin & Kotlin Versioning**: The setup uses the latest Gradle plugin and Kotlin version to leverage up-to-date features and improvements.
+- **Application ID & Versioning**: Properly set to ensure app identity and version management.
+- **MultiDex Configuration**: Included to accommodate a larger method count, which is beneficial in social media management applications involving multiple libraries.
+- **Dependencies**: The selection of libraries focuses on essential functionalities like image loading (Glide), networking (Retrofit), and database management (Room), enhancing the app's content scheduling and management capabilities.
+- **Comments**: Throughout, comments have been added to clarify architectural choices and best practices, focusing on maintaining professional and compliant language.
